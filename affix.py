@@ -27,12 +27,15 @@ def parseAffixString(str):
 
 def matchPattern(str, affix):
     if str[-len(affix.pat):] == affix.pat:
-        if affix.neg and str[-(len(affix.pat)+1)] not in affix.arr:
-            return 1
-        elif not affix.neg and str[-(len(affix.pat)+1)] in affix.arr:
-            return 1
+        if affix.arr != '':
+            if affix.neg and str[-(len(affix.pat)+1)] not in affix.arr:
+                return 1
+            elif not affix.neg and str[-(len(affix.pat)+1)] in affix.arr:
+                return 1
+            else:
+                return 0
         else:
-            return 0
+            return 1
     else:
         return 0
 

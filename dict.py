@@ -27,7 +27,37 @@ def parseDictFile(dictFile):
     return dictBase
 
 
+wordStruct = namedtuple('wordStruct', ['word', 'norm'])
+
+def createFullDict(dictBase, affixBase):
+    fullDict = []
+    index = [('1', 0)]
+    indexCounter = 0
+    for i in range(0, 1000):
+        for j in range(0, len(affixBase)):
+            if affixBase[j].key in dictBase[i].keys:
+                try:
+                    newWord = applyAffix(dictBase[i].word, affixBase[j])
+                    if newWord != '-1':
+                        fullDict.append(wordStruct(newWord, dictBase[i].word))
+                        if newWord[:4] != index[indexCounter][0]:
+                            index.append((newWord[:4], len(fullDict)-1))
+                            indexCounter += 1
+                except:
+                    print dictBase[i].word + " | " + dictBase[i].keys
+                    print affixBase[j].key + " | " + affixBase[j].rem + " | " + affixBase[j].add + " | " + affixBase[j].pat + " | " + affixBase[j].arr + " | " + str(affixBase[j].neg)
+                    break
+    return (fullDict, index)
+
 dictBase = parseDictFile(dictFile)
-s = dictBase[90985]
-print s.word
-print s.keys
+fullBaseIndexed = createFullDict(dictBase, affixBase)
+fullBase = fullBaseIndexed[0]
+index = fullBaseIndexed[1]
+
+print fullBase[1900].word
+print fullBase[1900].norm
+print index[18][0]
+print fullBase[index[18][1]-1].word
+print fullBase[index[18][1]-1].norm
+print fullBase[index[18][1]].word
+print fullBase[index[18][1]].norm
