@@ -42,7 +42,16 @@ def matchPattern(str, affix):
 
 def applyAffix(str, affix):
     if matchPattern(str, affix):
-        return str[:-len(affix.rem)]+affix.add
+        if affix.rem != '0':
+            if affix.add != '0':
+                return str[:-len(affix.rem)]+affix.add
+            else:
+                return str[:-len(affix.rem)]
+        else:
+            if affix.add != '0':
+                return str + affix.add
+            else:
+                return str
     else:
         return '-1'
 
