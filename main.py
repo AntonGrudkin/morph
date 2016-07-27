@@ -13,10 +13,10 @@ def morphNorm(text, dictSource='dictBase.csv', indexSource='index.csv'):
     return ' '.join(normWords)
 
 
-inputFile = open('input.txt', 'rb')
-s = inputFile.read()
-inputFile.close()
-
-outputFile = open('output.txt', 'wb')
-outputFile.write(morphNorm(s))
-outputFile.close()
+# inputFile = open('input.txt', 'rb')
+# s = inputFile.read()
+# inputFile.close()
+#
+# outputFile = open('output.txt', 'wb')
+# outputFile.write(morphNorm(s))
+# outputFile.close()
