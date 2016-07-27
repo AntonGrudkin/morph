@@ -16,13 +16,13 @@ def parsePattern(pattern):
         pat = pattern
     return (pat, arr, neg)
 
-myAffixStruct = namedtuple('myAffixStruct', ['key', 'rem', 'add', 'pat', 'arr', 'neg'])
+affixStruct = namedtuple('affixStruct', ['key', 'rem', 'add', 'pat', 'arr', 'neg'])
 
 
 def parseAffixString(str):
     s = str.split(' ')
     p = parsePattern(s[4][:-1])
-    return myAffixStruct(s[1], s[2], s[3], p[0], p[1], p[2])
+    return affixStruct(s[1], s[2], s[3], p[0], p[1], p[2])
 
 
 def matchPattern(str, affix):
@@ -43,14 +43,13 @@ def applyAffix(str, affix):
     else:
         return '-1'
 
-affixFile = open('ru_RU_1251_UTF8.aff', 'r')
-affixContent = affixFile.readlines()
 
-print affixContent[177]
-# print parseAffixString(affixContent[31])
-
-inputFile = open('input.txt', 'r')
-s = inputFile.read()
-print s
-myAffix = parseAffixString(affixContent[177])
-print applyAffix(s, myAffix)
+def parseAffixFile(affixFile):
+    affixContent = affixFile.readlines()[3:]
+    affixBase = []
+    for i in range(0, len(affixContent)):
+        try:
+            affixBase.append(parseAffixString(affixContent[i]))
+        except:
+            pass
+    return affixBase
