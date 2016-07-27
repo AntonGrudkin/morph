@@ -108,15 +108,17 @@ def getFromTo(word, index):
     return result
 
 
-source = 'index.csv'
-index = loadIndexFromCSV(source)
+def normWord(word, dictSource, index):
+    return normWordFromBase(word, dictSource, getFromTo(word, index))
+
+
 # print index[len(index)-1][0]
 
 #
-inputFile = open('input.txt', 'r')
-s = inputFile.read()
-print getFromTo(s, index)
-print normWordFromBase(s, 'dictBase.csv', getFromTo(s, index))
+# inputFile = open('input.txt', 'r')
+# s = inputFile.read()
+# print getFromTo(s, index)
+# print normWordFromBase(s, 'dictBase.csv', getFromTo(s, index))
 # dictBase = parseDictFile(dictFile)
 # affixBase = parseAffixFile(affixFile)
 # dictFile.close()
